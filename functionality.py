@@ -4,8 +4,10 @@ import io
 import os
 from urllib.parse import urlparse
 import base64
+import json
 
 
+location_image = "https://hips.hearstapps.com/hmg-prod/images/bojnice-castle-1603142898.jpg"
 location_name = "Default Location"
 
 def get_image_or_placeholder(path, color="grey"):
@@ -65,3 +67,42 @@ class Dialogue:
 
 player = Player()
 dialogue = Dialogue()
+
+def save_settings():
+    settings = {
+        "player": {
+            "image": player.image,
+            "name": player.name,
+            "stats": player.stats,
+            "inventory": [item.__dict__ for item in player.inventory],
+            "equipment": {key: (value.__dict__ if value else None) for key, value in player.equipment.items()},
+            "thought_cabinet": player.thought_cabinet,
+        },
+        "dialogue": {
+            "speakers": {key: {"image": value["image"], "dialogues": value["dialogues"]} for key, value in dialogue.speakers.items()},
+        },
+        "location": {
+            "name": location_name,
+            "image": location_image,
+        }
+    }
+    with open('settings/settings.json', 'w') as f:
+        json.dump(settings, f, indent=4)
+
+def load_settings():
+    with open('settings/settings.json', 'r') as f:
+        settings = json.load(f)
+
+    global player, dialogue, location_name, location_image
+    
+    player.image = settings["player"]["image"]
+    player.name = settings["player"]["name"]
+    player.stats = settings["player"]["stats"]
+    player.inventory = [Item(**item) for item in settings["player"]["inventory"]]
+    player.equipment = {key: (Item(**value) if value else None) for key, value in settings["player"]["equipment"].items()}
+    player.thought_cabinet = settings["player"]["thought_cabinet"]
+
+    dialogue.speakers = {key: {"image": value["image"], "dialogues": value["dialogues"]} for key, value in settings["dialogue"]["speakers"].items()}
+    
+    location_name = settings["location"]["name"]
+    location_image = settings["location"]["image"]

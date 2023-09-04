@@ -8,6 +8,13 @@ def debug_buttons():
     if st.button("Clear Cache"):
         st.caching.clear_cache()
 
+    if st.button("Save Settings"):
+        functionality.save_settings()
+
+    if st.button("Load Settings"):
+        functionality.load_settings()
+
+
     # Add NPC
     with st.expander("Add NPC"):
         npc_name = st.text_input("NPC Name")
