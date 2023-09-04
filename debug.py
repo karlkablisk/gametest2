@@ -34,16 +34,20 @@ def debug_buttons():
     with st.expander("Load New Location"):
         new_location_path = st.text_input("New Location Image Path (e.g., 'path/to/image.png')")
         new_location_color = st.color_picker("New Location Image Placeholder Color", '#808080')
+        new_location_name = st.text_input("New Location Name", functionality.location_name)
         if st.button("Load New Location"):
             functionality.get_image_or_placeholder(new_location_path, new_location_color)
+            functionality.location_name = new_location_name
             st.experimental_rerun()
 
     # Set Player Image
     with st.expander("Set Player Image"):
         new_image_path = st.text_input("New Player Image Path (e.g., 'path/to/image.png')")
         new_image_color = st.color_picker("New Player Image Placeholder Color", '#808080')
+        new_player_name = st.text_input("New Player Name", functionality.player.name)
         if st.button("Set New Player Image"):
             functionality.player.image = functionality.get_image_or_placeholder(new_image_path, new_image_color)
+            functionality.player.set_name(new_player_name)
             st.experimental_rerun()
 
     # Add Item
