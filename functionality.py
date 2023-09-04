@@ -1,3 +1,4 @@
+#functionality.py - handles all functionality and creation of settings
 from PIL import Image
 import io
 import os

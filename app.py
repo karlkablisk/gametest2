@@ -1,3 +1,4 @@
+#app.py - main app to start things and all streamlit interface
 import streamlit as st
 import functionality
 from debug import debug_buttons

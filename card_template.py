@@ -1,3 +1,4 @@
+#card_template.py - all html and css elements
 class CardTemplate:
     CARD_CSS = """
     .card-container {

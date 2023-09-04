@@ -1,3 +1,4 @@
+#debug.py - a list of debug tools, they effectively are functions that can be used to affect anything for the game
 import streamlit as st
 import functionality
 
