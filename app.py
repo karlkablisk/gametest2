@@ -51,15 +51,9 @@ with sidebar_tabs[0]:
 
     with player_details_tabs[3]:
         st.markdown("<div id='Player_Thought_Cabinet'></div>", unsafe_allow_html=True)
- 
-
-    thought_data = [{'image': get_image_or_placeholder("placeholder_thought.png", "purple"), 
-                    'name': thought['name'], 
-                    'description': thought['description'], 
-                    'relevance': thought['relevance']} 
-                for thought in functionality.player.thought_cabinet]
-                    cards_html = CardTemplate.generate_cards_html(thought_data)
-                    st.markdown(cards_html, unsafe_allow_html=True)
+        thought_data = [{'image': thought['image'], 'name': thought['name'], 'description': thought['description'], 'relevance': thought['relevance']} for thought in functionality.player.thought_cabinet]
+        cards_html = CardTemplate.generate_cards_html(thought_data)
+        st.markdown(cards_html, unsafe_allow_html=True)
 
 with sidebar_tabs[1]:
     st.markdown("<div id='Upload_File'></div>", unsafe_allow_html=True)
