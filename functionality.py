@@ -1,7 +1,6 @@
 from PIL import Image
 import io
 import os
-import BytesIO
 
 def get_image_or_placeholder(path, color="grey"):
     if isinstance(path, str) and os.path.exists(path):
