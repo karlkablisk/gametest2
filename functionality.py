@@ -1,6 +1,9 @@
 from PIL import Image
 import io
 import os
+from urllib.parse import urlparse
+import base64
+
 
 location_name = "Default Location"
 

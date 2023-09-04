@@ -85,5 +85,4 @@ def debug_buttons():
         jump_options = ["Open X tab", "Open Status", "Location Image Change", "Other Option"]
         selected_option = st.selectbox("Select Jump Option", jump_options)
         if st.button("Jump"):
-            # You will need to replace "YourFunctionToHandleJump" with an actual function to handle the jump
             YourFunctionToHandleJump(selected_option)
