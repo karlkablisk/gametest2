@@ -13,11 +13,18 @@ st.title('Text-based Tabletop RPG')
 sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
 # Adjusted location image and caption
+st.markdown("<div id='location_image' style='height: 300px; overflow: hidden;'>", unsafe_allow_html=True)
 location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
-st.image(location_image, caption=functionality.location_name, width=800, output_format="PNG")
+st.markdown("""
+<div class='location-image-container' style='border: 2px solid #000; border-radius: 15px; overflow: hidden; height: 300px; display: flex; align-items: center; justify-content: center; background-color: #f8f8f8;'>
+    <img src="{location_image}" alt="Location Image" style='object-fit: contain; width: 100%; max-height: 100%;'>
+</div>
+""", unsafe_allow_html=True)
 
 with sidebar_tabs[0]:
-    st.image(functionality.player.image, caption=functionality.player.name)  # Updated caption to dynamic player name
+    st.markdown("<div id='player_image' style='height: 300px; overflow: hidden;'>", unsafe_allow_html=True)
+    st.image(functionality.player.image, caption=functionality.player.name)  
+    st.markdown("</div>", unsafe_allow_html=True)
     st.write(f"Name: {functionality.player.name}")
     st.write(f"Health: {functionality.player.stats['Health']}")
     st.write(f"Attack: {functionality.player.stats['Attack']}")
