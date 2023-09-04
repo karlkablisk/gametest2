@@ -3,8 +3,8 @@ import functionality
 from debug import debug_buttons
 
 #Image placeholder
-location_image = functionality.get_image_or_placeholder('yellow')
-st.image(location_image, caption="Location")
+location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
+st.image(location_image, caption="Location", use_column_width=True)
 
 st.title('Text-based Tabletop RPG')
 
@@ -35,22 +35,21 @@ with sidebar_tabs[1]:
 with sidebar_tabs[2]:
     debug_buttons()
 
-# Main area with tabs
-main_tabs = st.tabs(["Location", "Dialogue"])
-with main_tabs[0]:
-    st.image(functionality.get_image_or_placeholder("placeholder_location_image.png", "yellow"), caption="Location")
-    st.chat_input("Enter text here")
+# Main area with columns
+col1, col2 = st.columns(2)
 
-with main_tabs[1]:
+with col1:
+    user_input = st.text_input("Enter text here")
+    st.text_area("Dialogue", value=user_input, height=200)
+
+with col2:
     if functionality.dialogue.speakers:  # Checking if there are any speakers
         dialogue_tabs = st.tabs(list(functionality.dialogue.speakers.keys()))
         for speaker in functionality.dialogue.speakers:
             with dialogue_tabs[speaker]:
-                st.image(functionality.get_image_or_placeholder(functionality.dialogue.speakers[speaker]["image"], 'red'), caption=speaker)
+                st.image(functionality.get_image_or_placeholder(functionality.dialogue.speakers[speaker]["image"], 'red'), caption=speaker, use_column_width=True)
                 for text in functionality.dialogue.speakers[speaker]["dialogues"]:
                     st.write(text)
     else:
         st.write("No dialogues available.")
 
-
-debug_buttons()
