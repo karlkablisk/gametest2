@@ -4,10 +4,6 @@ from debug import debug_buttons
 
 # st.caching.clear_cache()
 
-# Image placeholder
-location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
-st.image(location_image, caption="Location", use_column_width=True)
-
 st.title('Text-based Tabletop RPG')
 
 # Sidebar with tabs
@@ -25,9 +21,9 @@ with sidebar_tabs[0]:
     player_name = st.text_input("Player Name", value=functionality.player.name if hasattr(functionality.player, 'name') else "")
     if player_name:
         functionality.player.set_name(player_name)
-    
+
     player_details_tabs = st.sidebar.tabs(["Stats", "Equipment", "Inventory", "Mind"])
-    
+
     with player_details_tabs[0]:
         st.write("Stats")
         for stat, value in functionality.player.stats.items():
@@ -47,7 +43,7 @@ with sidebar_tabs[0]:
             st.write(f"Modifier: {item.modifier}")
             st.write(f"Modifies: {item.modifies}")
             st.write(f"Description: {item.description}")
-            
+
     with player_details_tabs[3]:
         st.write("Thought Cabinet")
         for thought in functionality.player.thought_cabinet:
@@ -65,8 +61,10 @@ with sidebar_tabs[2]:
 col1, col2 = st.columns(2)
 
 with col1:
-    user_input = st.text_input("Enter text here")
-    st.text_area("Dialogue", value=user_input, height=200)
+    location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
+    st.image(location_image, caption="Location", use_column_width=True)
+
+    user_input = st.text_area("Dialogue", height=200)
 
 with col2:
     if functionality.dialogue.speakers:  # Checking if there are any speakers

@@ -3,7 +3,10 @@ import functionality
 
 def debug_buttons():
     st.write("## Debug Tools")
-    
+   
+    if st.button("Clear Cache"):
+        st.caching.clear_cache()
+
     # Add NPC
     with st.expander("Add NPC"):
         npc_name = st.text_input("NPC Name")
