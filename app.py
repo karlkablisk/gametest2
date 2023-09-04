@@ -13,9 +13,7 @@ st.title('Text-based Tabletop RPG')
 sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
 # Adjusted location image and caption
-location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
-location_image = Image.open(location_image)
-location_image = location_image.resize((location_image.width, 300))
+location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow', 300)
 st.image(location_image, caption=functionality.location_name, output_format="PNG")
 
 
