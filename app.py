@@ -7,6 +7,10 @@ st.title('Text-based Tabletop RPG')
 # Sidebar with tabs
 sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
+# Moved location image above the columns
+location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
+st.image(location_image, caption="Location", use_column_width=True)
+
 with sidebar_tabs[0]:
     st.image(functionality.player.image, caption="Player")
     st.write(f"Name: {functionality.player.name}")
@@ -18,7 +22,9 @@ with sidebar_tabs[0]:
 
     with player_details_tabs[0]:
         for stat, value in functionality.player.stats.items():
-            st.write(f"{stat}: {value}")
+            # Display the total value added by equipped items in green
+            additional_value = sum(item.modifier for item in functionality.player.equipment.values() if item and item.modifies == stat)
+            st.write(f"{stat}: {value} {'(+ ' + str(additional_value) + ')' if additional_value else ''}")
 
     with player_details_tabs[1]:
         for equipment_spot, item in functionality.player.equipment.items():
@@ -42,20 +48,19 @@ with sidebar_tabs[2]:
 col1, col2 = st.columns(2)
 
 with col1:
-    location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
-    st.image(location_image, caption="Location", use_column_width=True)
+    pass  # Removed location image from this column since it's now at the top
 
 with col2:
     if functionality.dialogue.speakers:
-        dialogue_tabs = st.tabs(list(functionality.dialogue.speakers.keys()))  # Correct usage of st.tabs
+        dialogue_tabs = st.tabs(list(functionality.dialogue.speakers.keys()))
         for i, speaker in enumerate(functionality.dialogue.speakers.keys()):
-            with dialogue_tabs[i]:  # Correct way to access a tab in the tabs container
-                st.image(functionality.dialogue.speakers[speaker]["image"], caption=speaker, use_column_width=True)
+            with dialogue_tabs[i]:
+                # Made NPC image 50% smaller
+                st.image(functionality.dialogue.speakers[speaker]["image"], caption=speaker, width=300)
                 for text in functionality.dialogue.speakers[speaker]["dialogues"]:
                     st.write(f"{speaker}: {text}")
     else:
         st.write("No dialogues available.")
-
 
 # Moved chat input to the bottom outside any columns as per your request
 user_input = st.chat_input("Dialogue")
