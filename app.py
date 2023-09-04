@@ -52,14 +52,15 @@ with col1:
 
 with col2:
     if functionality.dialogue.speakers:
-        dialogue_tabs = st.tabs(list(functionality.dialogue.speakers.keys()))  # Removed the 'labels' keyword
-        for speaker in functionality.dialogue.speakers:
-            with dialogue_tabs.container(speaker):
+        dialogue_tabs = st.tabs(list(functionality.dialogue.speakers.keys()))  # Correct usage of st.tabs
+        for i, speaker in enumerate(functionality.dialogue.speakers.keys()):
+            with dialogue_tabs[i]:  # Correct way to access a tab in the tabs container
                 st.image(functionality.dialogue.speakers[speaker]["image"], caption=speaker, use_column_width=True)
                 for text in functionality.dialogue.speakers[speaker]["dialogues"]:
                     st.write(f"{speaker}: {text}")
     else:
         st.write("No dialogues available.")
+
 
 # Moved chat input to the bottom outside any columns as per your request
 user_input = st.chat_input("Dialogue")
