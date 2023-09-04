@@ -17,6 +17,7 @@ class Player:
         self.image = get_image_or_placeholder("placeholder_player_image.png", "blue")
         self.stats = {"Health": 100, "Attack": 50, "Defense": 30, "Strength": 5, "Dexterity": 5, "Agility": 5, "Charisma": 5, "Luck": 5}
         self.inventory = []
+        self.thought_cabinet = []
         self.equipment = {
             "Head": None,
             "Arms": None,

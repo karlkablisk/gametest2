@@ -10,7 +10,8 @@ st.image(location_image, caption="Location", use_column_width=True)
 st.title('Text-based Tabletop RPG')
 
 # Sidebar with tabs
-sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
+# Add a new tab labeled "Mind" in the sidebar.
+sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug", "Mind"])
 
 with sidebar_tabs[0]:
     st.image(functionality.get_image_or_placeholder(functionality.player.image, 'blue'), caption="Player")
@@ -35,6 +36,13 @@ with sidebar_tabs[0]:
             st.write(f"Modifier: {item.modifier}")
             st.write(f"Modifies: {item.modifies}")
             st.write(f"Description: {item.description}")
+            
+    with player_details_tabs[3]:
+        st.write("Thought Cabinet")
+        for thought in functionality.player.thought_cabinet:
+            st.write(f"Name: {thought['name']}")
+            st.write(f"Description: {thought['description']}")
+            st.write(f"Relevance: {thought['relevance']}")
 
 
 with sidebar_tabs[1]:

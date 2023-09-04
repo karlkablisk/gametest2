@@ -56,3 +56,11 @@ def debug_buttons():
         item_to_equip = st.selectbox("Select Item to Equip", [item.name for item in functionality.player.inventory])
         if st.button("Equip Item"):
             functionality.player.equipment[equipment_spot] = next(item for item in functionality.player.inventory if item.name == item_to_equip)
+
+    with st.expander("Add to Thought Cabinet"):
+        thought_name = st.text_input("Thought Name")
+        thought_description = st.text_input("Thought Description")
+        thought_relevance = st.text_input("Thought Relevance")
+        if st.button("Add Thought"):
+            new_thought = {'name': thought_name, 'description': thought_description, 'relevance': thought_relevance}
+            functionality.player.thought_cabinet.append(new_thought)
