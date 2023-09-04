@@ -42,6 +42,9 @@ class Player:
     def set_name(self, new_name):
         self.name = new_name
 
+    def set_image(self, new_image):
+        self.image = new_image
+
 class Item:
     def __init__(self, image, name, modifier, modifies, description):
         self.image = get_image_or_placeholder(image, "green")

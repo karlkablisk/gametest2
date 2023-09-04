@@ -47,8 +47,7 @@ with sidebar_tabs[0]:
     with player_details_tabs[2]:
         st.markdown("<div id='Player_Inventory'></div>", unsafe_allow_html=True)
         items_data = [{'image': item.image, 'name': item.name, 'description': item.description} for item in functionality.player.inventory]
-        cards_html = CardTemplate.generate_cards_html(items_data)
-        st.markdown(cards_html, unsafe_allow_html=True)
+        CardTemplate.generate_cards_html(items_data)
 
     with player_details_tabs[3]:
         st.markdown("<div id='Player_Thought_Cabinet'></div>", unsafe_allow_html=True)

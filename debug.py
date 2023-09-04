@@ -56,8 +56,11 @@ def debug_buttons():
         new_image_color = st.color_picker("New Player Image Placeholder Color", '#808080')
         new_player_name = st.text_input("New Player Name", functionality.player.name)
         if st.button("Set New Player Image"):
-            functionality.player.image = functionality.get_image_or_placeholder(new_image_path, new_image_color)
+            new_player_image = functionality.get_image_or_placeholder(new_image_path, new_image_color)
+            functionality.player.set_image(new_player_image)
             functionality.player.set_name(new_player_name)
+            new_name = functionality.player.set_name(new_player_name) 
+            functionality.player.name = new_name
             
 
     # Add Item
