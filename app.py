@@ -2,6 +2,7 @@ import streamlit as st
 import functionality
 from debug import debug_buttons
 
+
 #Image placeholder
 location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
 st.image(location_image, caption="Location", use_column_width=True)

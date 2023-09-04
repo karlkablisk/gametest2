@@ -1,9 +1,10 @@
 from PIL import Image
 import io
 import os
+import BytesIO
 
 def get_image_or_placeholder(path, color="grey"):
-    if os.path.exists(path):
+    if isinstance(path, str) and os.path.exists(path):
         return path
     else:
         img = Image.new('RGB', (100, 100), color=color)
