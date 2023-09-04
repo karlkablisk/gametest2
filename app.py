@@ -2,6 +2,8 @@ import streamlit as st
 import functionality
 from debug import debug_buttons
 
+st.caching.clear_cache()
+
 
 #Image placeholder
 location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
