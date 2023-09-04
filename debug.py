@@ -62,6 +62,7 @@ def debug_buttons():
             new_name = functionality.player.set_name(new_player_name) 
             functionality.player.name = new_name
             
+            
 
     # Add Item
     with st.expander("Add Item"):
