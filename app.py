@@ -7,14 +7,13 @@ st.title('Text-based Tabletop RPG')
 # Sidebar with tabs
 sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
-# Adjusted location image size and changed caption to dynamic location name
+# Moved location image above the columns
 location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
 st.image(location_image, caption=functionality.location_name, width=800, output_format="PNG")
 
 
 with sidebar_tabs[0]:
-    # Changed player image caption to dynamic player name and included edit option
-    st.image(functionality.player.image, caption=functionality.player.name, use_column_width=True)
+    st.image(functionality.player.image, caption="Player")
     st.write(f"Name: {functionality.player.name}")
     st.write(f"Health: {functionality.player.stats['Health']}")
     st.write(f"Attack: {functionality.player.stats['Attack']}")
@@ -33,22 +32,12 @@ with sidebar_tabs[0]:
             st.write(f"{equipment_spot}: {item.name if item else 'None'}")
 
     with player_details_tabs[2]:
-        # Adjusted item display to include small images with details in grid format
-        col1, col2 = st.columns(2)
         for item in functionality.player.inventory:
-            with col1:
-                st.image(item.image, width=50)
-            with col2:
-                st.write(f"{item.name}: {item.description}")
+            st.write(f"{item.name}: {item.description}")
 
     with player_details_tabs[3]:
-        # Adjusted thought cabinet display to include small images with details in grid format
-        col1, col2 = st.columns(2)
         for thought in functionality.player.thought_cabinet:
-            with col1:
-                st.image(thought['image'], width=50)
-            with col2:
-                st.write(f"{thought['name']}: {thought['description']} - {thought['relevance']}")
+            st.write(f"{thought['name']}: {thought['description']} - {thought['relevance']}")
 
 with sidebar_tabs[1]:
     st.file_uploader("Upload File")
