@@ -1,5 +1,6 @@
 import streamlit as st
 import functionality
+from streamlit import widgets  
 
 def debug_buttons():
     st.write("## Debug Tools")
@@ -78,3 +79,11 @@ def debug_buttons():
         if st.button("Add Thought"):
             new_thought = {'name': thought_name, 'description': thought_description, 'relevance': thought_relevance}
             functionality.player.thought_cabinet.append(new_thought)
+
+        #Debug Jump Tool
+    with st.expander("Debug Jump Tool"):
+        jump_options = ["Open X tab", "Open Status", "Location Image Change", "Other Option"]
+        selected_option = st.selectbox("Select Jump Option", jump_options)
+        if st.button("Jump"):
+            # You will need to replace "YourFunctionToHandleJump" with an actual function to handle the jump
+            YourFunctionToHandleJump(selected_option)
