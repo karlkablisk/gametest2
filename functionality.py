@@ -12,9 +12,6 @@ def get_image_or_placeholder(path, color="grey"):
         img_byte_arr.seek(0)
         return img_byte_arr
 
-
-
-
 class Player:
     def __init__(self):
         self.image = get_image_or_placeholder("placeholder_player_image.png", "blue")

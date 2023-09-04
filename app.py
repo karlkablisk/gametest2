@@ -7,23 +7,17 @@ from debug import debug_buttons
 st.title('Text-based Tabletop RPG')
 
 # Sidebar with tabs
-# Add a new tab labeled "Mind" in the sidebar.
 sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
 with sidebar_tabs[0]:
     st.image(functionality.get_image_or_placeholder(functionality.player.image, 'blue'), caption="Player")
-    if hasattr(functionality.player, 'name'):
-        st.write(f"Name: {functionality.player.name}")
+    st.write(f"Name: {functionality.player.name if hasattr(functionality.player, 'name') else 'Player'}")
     st.write(f"Health: {functionality.player.stats['Health']}")
     st.write(f"Attack: {functionality.player.stats['Attack']}")
     st.write(f"Defense: {functionality.player.stats['Defense']}")
 
-    player_name = st.text_input("Player Name", value=functionality.player.name if hasattr(functionality.player, 'name') else "")
-    if player_name:
-        functionality.player.set_name(player_name)
-
     player_details_tabs = st.sidebar.tabs(["Stats", "Equipment", "Inventory", "Mind"])
-
+    
     with player_details_tabs[0]:
         st.write("Stats")
         for stat, value in functionality.player.stats.items():
@@ -43,7 +37,7 @@ with sidebar_tabs[0]:
             st.write(f"Modifier: {item.modifier}")
             st.write(f"Modifies: {item.modifies}")
             st.write(f"Description: {item.description}")
-
+            
     with player_details_tabs[3]:
         st.write("Thought Cabinet")
         for thought in functionality.player.thought_cabinet:
@@ -58,13 +52,13 @@ with sidebar_tabs[2]:
     debug_buttons()
 
 # Main area with columns
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
     st.image(location_image, caption="Location", use_column_width=True)
-
-    user_input = st.text_area("Dialogue", height=200)
+    user_input = st.text_input("Enter text here")
+    st.text_area("Dialogue", value=user_input, height=200)
 
 with col2:
     if functionality.dialogue.speakers:  # Checking if there are any speakers
