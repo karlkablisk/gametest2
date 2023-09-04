@@ -7,18 +7,9 @@ import base64
 
 location_name = "Default Location"
 
-def get_image_or_placeholder(path, color="grey", height=None):
+def get_image_or_placeholder(path, color="grey"):
     if isinstance(path, str):
         if os.path.exists(path) or bool(urlparse(path).netloc):
-            if height:
-                img = Image.open(path)
-                width = int((height / img.height) * img.width)
-                img = img.resize((width, height), Image.ANTIALIAS)
-                img_byte_arr = io.BytesIO()
-                img.save(img_byte_arr, format='PNG')
-                img_byte_arr.seek(0)
-                data_url = base64.b64encode(img_byte_arr.getvalue()).decode('ascii')
-                return f"data:image/png;base64,{data_url}"
             return path
         else:
             img = Image.new('RGB', (100, 100), color=color)
@@ -27,7 +18,6 @@ def get_image_or_placeholder(path, color="grey", height=None):
             img_byte_arr.seek(0)
             data_url = base64.b64encode(img_byte_arr.getvalue()).decode('ascii')
             return f"data:image/png;base64,{data_url}"
-
 
 class Player:
     def __init__(self):
