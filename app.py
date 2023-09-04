@@ -43,3 +43,4 @@ with main_tabs[1]:
                 st.write(text)
 
 
+debug_buttons()
