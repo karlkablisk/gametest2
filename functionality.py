@@ -1,3 +1,13 @@
+from PIL import Image
+import io
+
+def generate_placeholder_image(color="grey"):
+    img = Image.new('RGB', (100, 100), color=color)
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format='PNG')
+    img_byte_arr = img_byte_arr.getvalue()
+    return img_byte_arr
+
 class Player:
     def __init__(self):
         self.image = "placeholder_player_image.png"

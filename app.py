@@ -1,6 +1,10 @@
 import streamlit as st
 import functionality
 
+#Image placeholder
+location_image = generate_placeholder_image('yellow')
+st.image(location_image, caption="Location")
+
 st.title('Text-based Tabletop RPG')
 
 # Sidebar with tabs
