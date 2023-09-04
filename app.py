@@ -1,10 +1,6 @@
 import streamlit as st
 import functionality
 
-#Image placeholder
-location_image = generate_placeholder_image('yellow')
-st.image(location_image, caption="Location")
-
 st.title('Text-based Tabletop RPG')
 
 # Sidebar with tabs
@@ -33,7 +29,7 @@ with sidebar_tabs[1]:
 # Main area with tabs
 main_tabs = st.tabs(["Location", "Dialogue"])
 with main_tabs[0]:
-    st.image("placeholder_location_image.png", caption="Location")
+    st.image(functionality.get_image_or_placeholder("placeholder_location_image.png", "yellow"), caption="Location")
     st.chat_input("Enter text here")
 
 with main_tabs[1]:
@@ -47,7 +43,4 @@ with main_tabs[1]:
 # Debug buttons
 if st.button("Toggle Debug Buttons"):
     if st.button("Add Item"):
-        functionality.player.inventory.append(functionality.Item("placeholder_item_image.png", "Sword", "+10", "Attack", "A sharp sword."))
-    if st.button("Add Dialogue"):
-        functionality.dialogue.add_speaker("NPC1", "placeholder_npc1_image.png")
-        functionality.dialogue.add_dialogue("NPC1", "Hello!")
+        functionality.player.inventory.append(functionality.Item("placeholder_item_image.png", "Sword", "+10", "Attack", "A sharp
