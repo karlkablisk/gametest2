@@ -1,19 +1,19 @@
 import streamlit as st
 import functionality
 from debug import debug_buttons
+from card_template import CardTemplate  # Import the new CardTemplate class
 
 st.title('Text-based Tabletop RPG')
 
 # Sidebar with tabs
 sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
-# Moved location image above the columns
+# Adjusted location image and caption
 location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
 st.image(location_image, caption=functionality.location_name, width=800, output_format="PNG")
 
-
 with sidebar_tabs[0]:
-    st.image(functionality.player.image, caption="Player")
+    st.image(functionality.player.image, caption=functionality.player.name)  # Updated caption to dynamic player name
     st.write(f"Name: {functionality.player.name}")
     st.write(f"Health: {functionality.player.stats['Health']}")
     st.write(f"Attack: {functionality.player.stats['Attack']}")
@@ -23,7 +23,6 @@ with sidebar_tabs[0]:
 
     with player_details_tabs[0]:
         for stat, value in functionality.player.stats.items():
-            # Display the total value added by equipped items in green
             additional_value = sum(item.modifier for item in functionality.player.equipment.values() if item and item.modifies == stat)
             st.write(f"{stat}: {value} {'(+ ' + str(additional_value) + ')' if additional_value else ''}")
 
@@ -32,12 +31,14 @@ with sidebar_tabs[0]:
             st.write(f"{equipment_spot}: {item.name if item else 'None'}")
 
     with player_details_tabs[2]:
-        for item in functionality.player.inventory:
-            st.write(f"{item.name}: {item.description}")
+        items_data = [{'image': item.image, 'name': item.name, 'description': item.description} for item in functionality.player.inventory]
+        cards_html = CardTemplate.generate_cards_html(items_data)
+        st.markdown(cards_html, unsafe_allow_html=True)
 
     with player_details_tabs[3]:
-        for thought in functionality.player.thought_cabinet:
-            st.write(f"{thought['name']}: {thought['description']} - {thought['relevance']}")
+        thought_data = [{'image': thought['image'], 'name': thought['name'], 'description': thought['description'], 'relevance': thought['relevance']} for thought in functionality.player.thought_cabinet]
+        cards_html = CardTemplate.generate_cards_html(thought_data)
+        st.markdown(cards_html, unsafe_allow_html=True)
 
 with sidebar_tabs[1]:
     st.file_uploader("Upload File")
@@ -56,12 +57,11 @@ with col2:
         dialogue_tabs = st.tabs(list(functionality.dialogue.speakers.keys()))
         for i, speaker in enumerate(functionality.dialogue.speakers.keys()):
             with dialogue_tabs[i]:
-                # Made NPC image 50% smaller
                 st.image(functionality.dialogue.speakers[speaker]["image"], caption=speaker, width=300)
                 for text in functionality.dialogue.speakers[speaker]["dialogues"]:
                     st.write(f"{speaker}: {text}")
     else:
         st.write("No dialogues available.")
 
-# Moved chat input to the bottom outside any columns as per your request
+# Moved chat input to the bottom outside any columns
 user_input = st.chat_input("Dialogue")
