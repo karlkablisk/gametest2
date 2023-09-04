@@ -9,7 +9,8 @@ sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
 # Adjusted location image size and changed caption to dynamic location name
 location_image = functionality.get_image_or_placeholder('placeholder_location_image.png', 'yellow')
-st.image(location_image, caption=functionality.location_name, width=st.width, output_format="PNG")
+st.image(location_image, caption=functionality.location_name, width=800, output_format="PNG")
+
 
 with sidebar_tabs[0]:
     # Changed player image caption to dynamic player name and included edit option
