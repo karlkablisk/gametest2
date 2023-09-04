@@ -14,21 +14,28 @@ sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
 with sidebar_tabs[0]:
     st.image(functionality.get_image_or_placeholder(functionality.player.image, 'blue'), caption="Player")
-    st.write("Stats")
-    for stat, value in functionality.player.stats.items():
-        st.write(f"{stat}: {value}")
+    
+    player_details_tabs = st.sidebar.tabs(["Stats", "Equipment", "Inventory"])
+    
+    with player_details_tabs[0]:
+        st.write("Stats")
+        for stat, value in functionality.player.stats.items():
+            st.write(f"{stat}: {value}")
 
-    st.write("Equipment")
-    for part, equipment in functionality.player.equipment.items():
-        st.write(f"{part}: {equipment}")
+    with player_details_tabs[1]:
+        st.write("Equipment")
+        for part, equipment in functionality.player.equipment.items():
+            st.write(f"{part}: {equipment}")
 
-    st.write("Inventory")
-    for item in functionality.player.inventory:
-        st.image(functionality.get_image_or_placeholder(item.image, 'green'))
-        st.write(f"Name: {item.name}")
-        st.write(f"Modifier: {item.modifier}")
-        st.write(f"Modifies: {item.modifies}")
-        st.write(f"Description: {item.description}")
+    with player_details_tabs[2]:
+        st.write("Inventory")
+        for item in functionality.player.inventory:
+            st.image(functionality.get_image_or_placeholder(item.image, 'green'))
+            st.write(f"Name: {item.name}")
+            st.write(f"Modifier: {item.modifier}")
+            st.write(f"Modifies: {item.modifies}")
+            st.write(f"Description: {item.description}")
+
 
 with sidebar_tabs[1]:
     st.file_uploader("Upload File")
