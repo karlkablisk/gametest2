@@ -11,12 +11,12 @@ st.title('Text-based Tabletop RPG')
 
 # Sidebar with tabs
 # Add a new tab labeled "Mind" in the sidebar.
-sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug", "Mind"])
+sidebar_tabs = st.sidebar.tabs(["Profile", "Settings", "Debug"])
 
 with sidebar_tabs[0]:
     st.image(functionality.get_image_or_placeholder(functionality.player.image, 'blue'), caption="Player")
     
-    player_details_tabs = st.sidebar.tabs(["Stats", "Equipment", "Inventory"])
+    player_details_tabs = st.sidebar.tabs(["Stats", "Equipment", "Inventory", "Mind"])
     
     with player_details_tabs[0]:
         st.write("Stats")
