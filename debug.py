@@ -28,7 +28,7 @@ def debug_buttons():
         value_to_add = st.number_input("Value to Add/Subtract", value=0)
         if st.button("Modify Stat"):
             functionality.player.stats[stat_to_modify] += value_to_add
-            st.experimental_rerun()
+            
 
     # Load New Location
     with st.expander("Load New Location"):
@@ -36,9 +36,11 @@ def debug_buttons():
         new_location_color = st.color_picker("New Location Image Placeholder Color", '#808080')
         new_location_name = st.text_input("New Location Name", functionality.location_name)
         if st.button("Load New Location"):
-            functionality.get_image_or_placeholder(new_location_path, new_location_color)
             functionality.location_name = new_location_name
-            st.experimental_rerun()
+            functionality.location_image = functionality.get_image_or_placeholder(new_location_path, new_location_color)
+      
+
+            
 
     # Set Player Image
     with st.expander("Set Player Image"):
@@ -48,7 +50,7 @@ def debug_buttons():
         if st.button("Set New Player Image"):
             functionality.player.image = functionality.get_image_or_placeholder(new_image_path, new_image_color)
             functionality.player.set_name(new_player_name)
-            st.experimental_rerun()
+            
 
     # Add Item
     with st.expander("Add Item"):
@@ -69,7 +71,7 @@ def debug_buttons():
         item_to_equip = st.selectbox("Select Item to Equip", [item.name for item in functionality.player.inventory])
         if st.button("Equip Item"):
             functionality.player.equipment[equipment_spot] = next(item for item in functionality.player.inventory if item.name == item_to_equip)
-            st.experimental_rerun()
+            
 
     with st.expander("Add to Thought Cabinet"):
         thought_name = st.text_input("Thought Name")

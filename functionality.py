@@ -36,8 +36,8 @@ class Player:
             "Accessory2": None,
         }
 
-        def set_name(self, new_name):
-            self.name = new_name
+    def set_name(self, new_name):
+        self.name = new_name
 
 class Item:
     def __init__(self, image, name, modifier, modifies, description):
