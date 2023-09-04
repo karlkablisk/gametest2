@@ -40,7 +40,3 @@ with main_tabs[1]:
             for text in functionality.dialogue.speakers[speaker]["dialogues"]:
                 st.write(text)
 
-# Debug buttons
-if st.button("Toggle Debug Buttons"):
-    if st.button("Add Item"):
-        functionality.player.inventory.append(functionality.Item("placeholder_item_image.png", "Sword", "+10", "Attack", "A sharp
