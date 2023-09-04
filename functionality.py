@@ -12,9 +12,13 @@ def get_image_or_placeholder(path, color="grey"):
         img_byte_arr.seek(0)
         return img_byte_arr
 
+
+
+
 class Player:
     def __init__(self):
         self.image = get_image_or_placeholder("placeholder_player_image.png", "blue")
+        self.name = "Player Name"
         self.stats = {"Health": 100, "Attack": 50, "Defense": 30, "Strength": 5, "Dexterity": 5, "Agility": 5, "Charisma": 5, "Luck": 5}
         self.inventory = []
         self.thought_cabinet = []
@@ -27,6 +31,9 @@ class Player:
             "Accessory1": None,
             "Accessory2": None,
         }
+
+        def set_name(self, new_name):
+            self.name = new_name
 
 class Item:
     def __init__(self, image, name, modifier, modifies, description):

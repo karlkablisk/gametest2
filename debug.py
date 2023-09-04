@@ -1,7 +1,6 @@
 import streamlit as st
 import functionality
 
-
 def debug_buttons():
     st.write("## Debug Tools")
     
