@@ -13,11 +13,6 @@ with sidebar_tabs[0]:
     st.write(f"Health: {functionality.player.stats['Health']}")
     st.write(f"Attack: {functionality.player.stats['Attack']}")
     st.write(f"Defense: {functionality.player.stats['Defense']}")
-    st.write(f"Strength: {functionality.player.stats['Strength']}")
-    st.write(f"Dexterity: {functionality.player.stats['Dexterity']}")
-    st.write(f"Agility: {functionality.player.stats['Agility']}")
-    st.write(f"Charisma: {functionality.player.stats['Charisma']}")
-    st.write(f"Luck: {functionality.player.stats['Luck']}")
 
     player_details_tabs = st.sidebar.tabs(["Stats", "Equipment", "Inventory", "Thought Cabinet"])
 
