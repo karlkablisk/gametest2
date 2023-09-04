@@ -23,6 +23,21 @@ class CardTemplate:
     .card .description {
         font-size: 0.9em;
     }
+    .location-image-container {
+        border: 2px solid #000;
+        border-radius: 15px;
+        overflow: hidden;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f8f8;
+    }
+    .location-image-container img {
+        object-fit: contain;
+        width: 100%;
+        max-height: 100%;
+    }
     """
 
     @staticmethod
