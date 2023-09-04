@@ -1,5 +1,6 @@
 import streamlit as st
 import functionality
+from debug import debug_buttons
 
 st.title('Text-based Tabletop RPG')
 
