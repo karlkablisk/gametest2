@@ -1,6 +1,9 @@
 import streamlit as st
 import functionality
 
+st.caching.clear_cache()
+
+
 def debug_buttons():
     st.write("## Debug Tools")
     
