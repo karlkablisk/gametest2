@@ -58,8 +58,8 @@ with sidebar_tabs[0]:
                     'description': thought['description'], 
                     'relevance': thought['relevance']} 
                 for thought in functionality.player.thought_cabinet]
-        cards_html = CardTemplate.generate_cards_html(thought_data)
-        st.markdown(cards_html, unsafe_allow_html=True)
+                    cards_html = CardTemplate.generate_cards_html(thought_data)
+                    st.markdown(cards_html, unsafe_allow_html=True)
 
 with sidebar_tabs[1]:
     st.markdown("<div id='Upload_File'></div>", unsafe_allow_html=True)
