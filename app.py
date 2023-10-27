@@ -1,8 +1,6 @@
 #app.py - main app to start things and all streamlit interface
 import streamlit as st
-import functionality
-from debug import debug_buttons
-from card_template import CardTemplate
+import os
 
 #Langchain
 from langchain.callbacks.base import BaseCallbackHandler
@@ -17,6 +15,11 @@ for filename in os.listdir(folder_name):
         module_name = filename[:-3]  # remove the .py extension
         module = importlib.import_module(f"{folder_name}.{module_name}")
 #Chars all imported
+
+#file import
+from debug import debug_buttons
+from card_template import CardTemplate
+import functionality
 
 class StreamHandler(BaseCallbackHandler):
 
