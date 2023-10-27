@@ -4,6 +4,51 @@ import functionality
 from debug import debug_buttons
 from card_template import CardTemplate
 
+#Langchain
+from langchain.callbacks.base import BaseCallbackHandler
+from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
+from langchain.schema import ChatMessage
+
+#chars
+import chefbot
+
+
+class StreamHandler(BaseCallbackHandler):
+
+    def __init__(self, container, initial_text=""):
+        self.container = container
+        self.text = initial_text
+        self.should_stream = False
+        self.word_count = 0
+        self.ignore_flag = False
+        self.last_flash = time.time()
+
+    def on_llm_new_token(self, token: str, **kwargs) -> None:
+        self.text += token
+        self.word_count += len(token.split())
+
+        # Display a flashing line bar while waiting for a decision
+        if time.time() - self.last_flash >= 0.5:
+            self.last_flash = time.time()
+            self.container.write("|")
+        
+        if self.word_count >= 2:
+            if self.text.startswith("Action Input:") or self.text.startswith("Observation:") or self.text.startswith("Thought:") or self.text.startswith("Thoughts:"):
+                self.ignore_flag = True
+
+            if "Final Answer:" in self.text:
+                self.ignore_flag = False
+                self.should_stream = True
+
+            elif ":" not in self.text:
+                self.should_stream = True
+
+            if self.should_stream and not self.ignore_flag:
+                final_text = self.text.split("Final Answer:")[-1].split("Alice:")[-1].strip()
+                self.container.write(final_text)
+
+
+
 if 'jump_to' not in st.session_state:
     st.session_state['jump_to'] = None
 
@@ -81,4 +126,43 @@ with col2:
 
 # Moved chat input to the bottom outside any columns
 st.markdown("<div id='Dialogue_Area'></div>", unsafe_allow_html=True)
-user_input = st.chat_input("Dialogue")
+prompt = st.chat_input("Type here!
+
+user_avatar = "https://ai-scool.com/sites/default/files/styles/thumbnail/public/pictures/2023-08/geahtr%201.png?itok=onQcEWJF"
+ai_avatar = "https://ai-scool.com/sites/default/files/2023-08/ai-generated-gddd745293_1280_0.png"
+
+
+  
+    # Initialize session state variables
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+if 'chat_history' not in st.session_state:
+    st.session_state.chat_history = []
+if 'msg_containers' not in st.session_state:
+    st.session_state.msg_containers = []
+
+    #for loop for chat history
+for message in st.session_state.messages:
+    with st.chat_message(message["type"], avatar=message["avatar"]):
+        st.write(message["content"])
+
+
+if prompt:    
+    st.session_state.messages.append({"type": "user", "content": prompt, "avatar": user_avatar})
+
+        # Display user's message immediately
+    with st.chat_message("user", avatar=user_avatar):
+        st.write(prompt)")
+
+    with st.chat_message("assistant", avatar=ai_avatar):
+            stream_handler = StreamHandler(st.empty())
+            #stream_handler = StreamHandler(ai_placeholder)
+            st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
+            # Capture the streaming text
+            response = chefbot(modified_normal_prompt, callbacks=[stream_handler, st_cb])
+            # Extract the 'output' value from new_response after streaming
+            new_result = response['output']
+
+             # Append AI's message to st.session_state.messages
+            st.session_state.messages.append({"type": "assistant", "content": new_result, "avatar": ai_avatar})
