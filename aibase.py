@@ -62,16 +62,16 @@ def initialize_agent_executor(tools, prompt_template):
     global llm_chain  # Use the global llm_chain variable
     llm_chain = LLMChain(llm=llm, prompt=prompt_template, memory=memory)
 
-# AGENT AND EXECUTOR
-agent = ConversationalChatAgent.from_llm_and_tools(llm=llm, tools=None)
-agent_executor = AgentExecutor.from_agent_and_tools(
-  agent=agent,
-  tools=None,
-  verbose=True,
-  memory=memory,
-  return_intermediate_steps=True,
-  handle_parsing_errors=True
-)
+    # AGENT AND EXECUTOR
+    agent = ConversationalChatAgent.from_llm_and_tools(llm=llm, tools=None)
+    agent_executor = AgentExecutor.from_agent_and_tools(
+    agent=agent,
+    tools=None,
+    verbose=True,
+    memory=memory,
+    return_intermediate_steps=True,
+    handle_parsing_errors=True
+    )
 
 def get_agent_executor():
     return agent_executor
