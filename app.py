@@ -126,7 +126,7 @@ with col2:
 
 # Moved chat input to the bottom outside any columns
 st.markdown("<div id='Dialogue_Area'></div>", unsafe_allow_html=True)
-#prompt = st.chat_input("Type here!
+#prompt = st.chat_input("Type here!")
 
 user_avatar = "https://ai-scool.com/sites/default/files/styles/thumbnail/public/pictures/2023-08/geahtr%201.png?itok=onQcEWJF"
 ai_avatar = "https://ai-scool.com/sites/default/files/2023-08/ai-generated-gddd745293_1280_0.png"
