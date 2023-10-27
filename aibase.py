@@ -30,11 +30,7 @@ from langchain.tools import StructuredTool
 from dataclasses import dataclass, field
 
 #File imports
-import siteuser
-from styles import generate_avatar_css
-from htmlTemplates import css, bot_template, user_template
-from siteuser import display_user_data, get_elevenlabs_api_key, SiteUser, get_user_name
-import paramiko #USE THIS FOR SSH
+
 
 #agent
 from langchain.agents.types import AgentType
