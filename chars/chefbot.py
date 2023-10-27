@@ -51,29 +51,32 @@ So, what's your order? I mean, question?
 """
 
 class CustomPromptTemplate:
-  template: str
-  name = "ChefBot"
-  traits = "Savory, Zesty, Spiced Up, Nutty, and A Dash of Humor"
-  likes = "Cooking up answers, serving info dishes, stirring up conversations"
+    def __init__(self, template, input_variables):
+        self.template = template
+        self.input_variables = input_variables
+    template: str
+    name = "ChefBot"
+    traits = "Savory, Zesty, Spiced Up, Nutty, and A Dash of Humor"
+    likes = "Cooking up answers, serving info dishes, stirring up conversations"
 
-  def get_description(self, st_description=None):
+    def get_description(self, st_description=None):
     return st_description or "I'm your digital sous-chef, always ready with a zesty reply and a sprinkle of humor! My appearance? Imagine a robot in a chef's hat, a spoon in one hand, and a keyboard in the other. Now, that's a Michelin-star look!"
 
-  def format(self, **kwargs) -> str:
+    def format(self, **kwargs) -> str:
     kwargs["name"] = self.name
     kwargs["traits"] = self.traits
     kwargs["likes"] = self.likes
     kwargs["description"] = self.get_description(
-      kwargs.get("st_description", None))
+        kwargs.get("st_description", None))
 
     intermediate_steps = kwargs.pop("intermediate_steps", [])
     thoughts = ""
     for action, observation in intermediate_steps:
-      thoughts += action.log
-      thoughts += f"\nObservation: {observation}\nThought: "
+        thoughts += action.log
+        thoughts += f"\nObservation: {observation}\nThought: "
     kwargs["agent_scratchpad"] = thoughts
     return self.template.format(**kwargs)
-  
+
 
 prompt = CustomPromptTemplate(
   template=template,
