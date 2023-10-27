@@ -10,8 +10,13 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 from langchain.schema import ChatMessage
 
 #chars
-import chefbot
-
+import importlib
+folder_name = "chars"
+for filename in os.listdir(folder_name):
+    if filename.endswith(".py") and not filename.startswith("__"):
+        module_name = filename[:-3]  # remove the .py extension
+        module = importlib.import_module(f"{folder_name}.{module_name}")
+#Chars all imported
 
 class StreamHandler(BaseCallbackHandler):
 
@@ -160,7 +165,7 @@ if prompt:= st.chat_input(placeholder="Type here!!"):
             #stream_handler = StreamHandler(ai_placeholder)
             st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
             # Capture the streaming text
-            response = chefbot(modified_normal_prompt, callbacks=[stream_handler, st_cb])
+            response = chefbot(prompt, callbacks=[stream_handler, st_cb])
             # Extract the 'output' value from new_response after streaming
             new_result = response['output']
 
