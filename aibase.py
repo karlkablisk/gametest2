@@ -35,7 +35,7 @@ from dataclasses import dataclass, field
 #agent
 from langchain.agents.types import AgentType
 from langchain.agents.agent_toolkits import create_conversational_retrieval_agent
-from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent, AgentOutputParser, BaseMultiActionAgent,BaseSingleActionAgent, initialize_agent
+from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent, AgentOutputParser, BaseMultiActionAgent,BaseSingleActionAgent, initialize_agent, ZeroShotAgent, Tool, load_tools, AgentType, ConversationalChatAgent, AgentExecutor
 from langchain.tools.base import BaseTool
 from langchain.chains import LLMChain
 from langchain.schema import Document, AgentAction, AgentFinish
