@@ -49,7 +49,6 @@ from typing import List, Callable
 load_dotenv()
 
 # Initialize OpenAI
-OpenAI(openai_api_key=os.environ.get("OPENAI_API_KEY"))
 
 # DATA STORAGE
 msgs = StreamlitChatMessageHistory()
