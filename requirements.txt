@@ -1,0 +1,50 @@
+# Core dependencies
+langchain
+streamlit
+python-dotenv==1.0.0
+openai
+
+#vectorstore
+faiss-cpu==1.7.4
+fastembed
+qdrant-client[fastembed]
+
+#voice
+elevenlabs
+ffmpeg
+
+# file reading
+PyPDF2 # pdf
+pdfminer.six #pdf for jp
+python-docx # docx
+docx2txt #doc to txt
+xlrd # excel
+openpyxl # xlsx
+pandas
+pypdf>=3 
+sentence-transformers
+docarray
+tabulate
+
+# Miscellaneous 
+tiktoken
+
+# Tools
+google-search-results
+
+#Speech to text
+bokeh
+streamlit-bokeh-events
+speechrecognition 
+pyaudio
+python-magic
+
+# other
+paramiko
+
+# uncomment to use huggingface llms
+# huggingface-hub==0.14.1
+
+# uncomment to use instructor embeddings
+# InstructorEmbedding==1.0.1
+# sentence-transformers==2.2.2
