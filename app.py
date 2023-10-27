@@ -153,7 +153,7 @@ if prompt:= st.chat_input(placeholder="Type here!!"):
 
         # Display user's message immediately
     with st.chat_message("user", avatar=user_avatar):
-        st.write(prompt)")
+        st.write(prompt)
 
     with st.chat_message("assistant", avatar=ai_avatar):
             stream_handler = StreamHandler(st.empty())
