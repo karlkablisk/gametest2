@@ -21,6 +21,7 @@ from debug import debug_buttons
 from card_template import CardTemplate
 import functionality
 
+
 class StreamHandler(BaseCallbackHandler):
 
     def __init__(self, container, initial_text=""):

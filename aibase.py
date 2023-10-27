@@ -1,10 +1,49 @@
 # BASE.py
 
 # Langchain imports
-from langchain import OpenAI, LLMChain, ChatOpenAI
-from langchain.tools import tool
-from langchain.agents import AgentExecutor, ConversationalChatAgent
+from langchain.vectorstores import FAISS
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.agents.agent_toolkits import create_retriever_tool, create_conversational_retrieval_agent
+from langchain.chat_models import ChatOpenAI
+from langchain.chains import ConversationalRetrievalChain
+from langchain.agents.openai_functions_agent.agent_token_buffer_memory import AgentTokenBufferMemory
+from langchain.agents.openai_functions_agent.base import OpenAIFunctionsAgent
+from langchain.schema.messages import SystemMessage
+from langchain.prompts import MessagesPlaceholder
 from langchain.memory import ConversationBufferMemory
+from langchain.callbacks.base import BaseCallbackHandler
+from langchain.prompts.prompt import PromptTemplate
+from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
+from langchain.schema import ChatMessage
+
+#stream
+from langchain.callbacks.streamlit.streamlit_callback_handler import LLMThought
+from streamlit.delta_generator import DeltaGenerator
+from langchain.callbacks import StreamlitCallbackHandler
+
+#toolkit
+from langchain.document_loaders import TextLoader
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.text_splitter import CharacterTextSplitter
+#from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.tools import StructuredTool
+from dataclasses import dataclass, field
+
+#File imports
+import siteuser
+from styles import generate_avatar_css
+from htmlTemplates import css, bot_template, user_template
+from siteuser import display_user_data, get_elevenlabs_api_key, SiteUser, get_user_name
+import paramiko #USE THIS FOR SSH
+
+#agent
+from langchain.agents.types import AgentType
+from langchain.agents.agent_toolkits import create_conversational_retrieval_agent
+from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent, AgentOutputParser, BaseMultiActionAgent,BaseSingleActionAgent, initialize_agent
+from langchain.tools.base import BaseTool
+#from langchain.chains import LLMChain
+from langchain.schema import Document, AgentAction, AgentFinish
+from langchain.tools import tool
 from dotenv import load_dotenv
 
 #other imports
