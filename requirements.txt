@@ -36,7 +36,6 @@ google-search-results
 bokeh
 streamlit-bokeh-events
 speechrecognition 
-pyaudio
 python-magic
 
 # other
