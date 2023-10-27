@@ -83,10 +83,8 @@ prompt = CustomPromptTemplate(
   #tools_getter=get_tools,
   input_variables=["input", "chat_history", "intermediate_steps"])
 
-# Initialize the agent executor and update llm_chain
+# Assuming 'tools' and 'prompt' are already defined
 aibase.initialize_agent_executor(tools, prompt)
 
 # Update agent and executor
 chefbot = aibase.get_agent_executor()
-#agent_executor.agent.prompt = CustomPromptTemplateForChefBot(template=template)
-agent_executor.tools = tools

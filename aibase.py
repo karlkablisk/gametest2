@@ -54,23 +54,25 @@ load_dotenv()
 msgs = StreamlitChatMessageHistory()
 memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=msgs, return_messages=True, output_key='output')
 
-# LLM AND MODELS
-llm = ChatOpenAI(temperature=0.8, model="gpt-3.5-turbo", streaming=True,verbose=True)
+# Initialize LLM and Models
+llm = ChatOpenAI(temperature=0.8, model="gpt-3.5-turbo", streaming=True, verbose=True)
 llm_chain = None  # Initialize as None, and update it later
+agent_executor = None  # Initialize as None, and update it later
+memory = {}  # Initialize empty memory. Update this based on your requirements.
 
 def initialize_agent_executor(tools, prompt_template):
-    global llm_chain  # Use the global llm_chain variable
+    global llm_chain, agent_executor  # Use the global llm_chain and agent_executor variables
     llm_chain = LLMChain(llm=llm, prompt=prompt_template, memory=memory)
 
-    # AGENT AND EXECUTOR
-    agent = ConversationalChatAgent.from_llm_and_tools(llm=llm, tools=None)
+    # Initialize agent and executor
+    agent = ConversationalChatAgent.from_llm_and_tools(llm=llm, tools=tools)
     agent_executor = AgentExecutor.from_agent_and_tools(
-    agent=agent,
-    tools=None,
-    verbose=True,
-    memory=memory,
-    return_intermediate_steps=True,
-    handle_parsing_errors=True
+        agent=agent,
+        tools=tools,
+        verbose=True,
+        memory=memory,
+        return_intermediate_steps=True,
+        handle_parsing_errors=True
     )
 
 def get_agent_executor():
