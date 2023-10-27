@@ -56,7 +56,11 @@ memory = ConversationBufferMemory(memory_key="chat_history", chat_memory=msgs, r
 
 # LLM AND MODELS
 llm = ChatOpenAI(temperature=0.8, model="gpt-3.5-turbo", streaming=True,verbose=True)
-llm_chain = LLMChain(llm=llm, prompt=None, memory=memory)
+llm_chain = None  # Initialize as None, and update it later
+
+def initialize_agent_executor(tools, prompt_template):
+    global llm_chain  # Use the global llm_chain variable
+    llm_chain = LLMChain(llm=llm, prompt=prompt_template, memory=memory)
 
 # AGENT AND EXECUTOR
 agent = ConversationalChatAgent.from_llm_and_tools(llm=llm, tools=None)

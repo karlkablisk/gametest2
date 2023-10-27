@@ -2,7 +2,7 @@
 
 import aibase 
 from langchain.tools import tool
-from langchain.prompts.prompt import PromptTemplate
+from langchain.prompts import StringPromptTemplate, PromptTemplate
 
 # Custom Tools
 @tool
@@ -68,7 +68,15 @@ class CustomPromptTemplate:
       thoughts += f"\nObservation: {observation}\nThought: "
     kwargs["agent_scratchpad"] = thoughts
     return self.template.format(**kwargs)
+  
 
+prompt = CustomPromptTemplate(
+  template=template,
+  #tools_getter=get_tools,
+  input_variables=["input", "chat_history", "intermediate_steps"])
+
+# Initialize the agent executor and update llm_chain
+aibase.initialize_agent_executor(tools, prompt)
 
 # Update agent and executor
 chefbot = aibase.get_agent_executor()
