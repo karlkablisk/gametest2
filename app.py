@@ -6,6 +6,7 @@ import os
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 from langchain.schema import ChatMessage
+from langchain.tools import BaseTool, StructuredTool, Tool, tool
 
 #chars
 import importlib
