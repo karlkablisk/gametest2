@@ -10,10 +10,12 @@ from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent, AgentOut
 # Custom Tools
 @tool
 def find_recipe(user_context: str) -> str:
+    """when you need to find a recipe"""
     return f"Finding a recipe related to {user_context}"
 
 @tool
 def tell_joke(user_context: str) -> str:
+    """When its time to tell a joke"""
     return "Why did the scarecrow win an award? Because he was outstanding in his field."
 
 # TOOLS HERE
